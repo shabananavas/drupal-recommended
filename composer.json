@@ -1,0 +1,18 @@
+{
+  "name": "acromedia/drupal-recommended",
+  "description": "An Acro Media drupal project skeleton",
+  "type": "template",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "mdupree",
+      "email": "mdupree@acromedia.com"
+    }
+  ],
+  "require": {},
+  "scripts": {
+    "post-root-package-install": [
+      "php ./template/post-create-project-setup.php"
+    ]
+  }
+}
