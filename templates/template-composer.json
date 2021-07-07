@@ -1,5 +1,5 @@
 {
-    "name": "acromedia/drupal",
+    "name": "acromedia/drupal-recommended",
     "description": "Project template for Drupal 9 projects with a relocated document root",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -18,7 +18,20 @@
         "composer/installers": "^1.9",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-project-message": "^9.2",
-        "drupal/core-recommended": "^9.2"
+        "drupal/core-recommended": "^9.2",
+        "drupal/jsonapi_menu_items": "^1.1",
+        "drupal/openapi": "^2.0@RC",
+        "drupal/openapi_jsonapi": "^3.0",
+        "drupal/openapi_ui": "^1.0@RC",
+        "drupal/openapi_ui_swagger": "^1.0@RC",
+        "amazeeio/drupal_integrations": "0.3.4",
+        "cweagans/composer-patches": "1.7.0",
+        "drupal/lagoon_logs": "1.1.0",
+        "drush/drush": "10.3.6",
+        "zaporylie/composer-drupal-optimizations": "1.2.0"
+    },
+    "require-dev": {
+        "drupal/core-dev-pinned": "9.1.3"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -39,7 +52,8 @@
                 "type:drupal-core"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library",
+                "swagger-api/swagger-ui"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
@@ -63,6 +77,18 @@
                 "type:drupal-custom-theme"
             ]
         },
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "amazeeio/drupal_integrations"
+            ],
+            "file-mapping": {
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
+            },
+            "locations": {
+                "web-root": "web/"
+            }
+        },
         "drupal-core-project-message": {
             "include-keys": [
                 "homepage",
@@ -71,7 +97,8 @@
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                         </>",
                 "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>  based off the drupal/recommended-project template!     </>",
+                "<bg=blue;fg=white>  The project is setup to deploy via lagoon.             </>",
                 "<bg=blue;fg=white>                                                         </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",

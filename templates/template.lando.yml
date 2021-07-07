@@ -1,0 +1,12 @@
+name: [PROJECTNAME]
+recipe: drupal9
+config:
+  webroot: [WEBROOT]
+
+services:
+  solr:
+    type: solr
+    portforward: true
+    core: drupal9
+    config:
+      dir: solr_conf

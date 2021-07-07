@@ -1,0 +1,52 @@
+
+web/sites/*/services*.yml
+web/sites/*/settings.local.php
+# Ignore paths that may contain user-generated content
+web/sites/*/files
+web/sites/*/public
+web/sites/*/private
+web/sites/*/files-public
+web/sites/*/files-private
+
+# Ignore paths that may contain temporary files
+web/sites/*/translations
+web/sites/*/tmp
+web/sites/*/cache
+
+# Ignore testing related files
+web/sites/simpletest
+
+# Ignore drupal core (if not versioning drupal sources)
+web/core
+web/vendor
+web/modules/README.txt
+web/modules/contrib
+web/profiles/README.txt
+web/themes/README.txt
+web/sites/README.txt
+web/sites/example.sites.php
+web/sites/example.settings.local.php
+web/sites/development.services.yml
+web/libraries
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/.ht.router.php
+/.htaccess
+/autoload.php
+/example.gitignore
+/index.php
+/INSTALL.txt
+/LICENSE.txt
+/README.txt
+/robots.txt
+/update.php
+/web.config
+*.sql
+*.sql.gz
+vendor
+
+# Ignore phpstorm settings file.
+.idea

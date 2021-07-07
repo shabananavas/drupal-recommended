@@ -1,0 +1,8 @@
+'*':
+  host: ssh.lagoonize-prd.acromedia.com
+  paths:
+    files: files
+  user: ${env-name}
+  ssh:
+    options: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22'
+    tty: false

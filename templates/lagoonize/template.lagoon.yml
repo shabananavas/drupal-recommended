@@ -1,0 +1,47 @@
+docker-compose-yaml: docker-compose.yml
+
+project: [PROJECTNAME]
+
+api: https://api.lagoon-prd.acromedia.com/graphql
+ssh: ssh.lagoon-prd.acromedia.com:22
+
+tasks:
+  #   pre-rollout:
+  #     - run:
+  #         name: drush sql-dump
+  #         command: mkdir -p /app/web/sites/default/files/private/ && drush sql-dump --ordered-dump --gzip --result-file=/app/web/sites/default/files/private/pre-deploy-dump.sql.gz || true
+  #         service: cli
+
+  post-rollout:
+    - run:
+        name: IF no Drupal installed and we are not master branch, sync from master branch
+        command: |
+          if tables=$(drush sqlq "show tables like 'node';") && [ -z "$tables" ] && [[ "$LAGOON_ENVIRONMENT" != "master" ]]; then
+              # no drupal installed, sync DB from master branch
+              drush -y sql-sync @lagoon.$LAGOON_PROJECT-master @self
+              drush -y rsync @lagoon.$LAGOON_PROJECT-master:web/sites/default/files/ @self:%files
+          fi
+        service: cli
+    - run:
+        name: drush cim
+        command: drush -y cim
+        service: cli
+    - run:
+        name: drush updb
+        command: drush -y updb
+        service: cli
+    - run:
+        name: drush cr
+        command: drush -y cr
+        service: cli
+
+
+
+environments:
+  9.x:
+    # routes:
+    cronjobs:
+      - name: drush cron
+        schedule: "*/15 * * * *"
+        command: drush cron
+        service: cli

@@ -77,31 +77,31 @@ automated-tests:
 code-standards:
   extends: .code-standards
 
-config-test-production:
-  extends: .config-test
+#config-test-production:
+#  extends: .config-test
+#
+#  only:
+#    - master
+#
+#  environment:
+#    name: production
+#    url: $PRODUCTION_URL
+#
+#  variables:
+#    SSH_DESTINATION: $PRODUCTION_SSH_DESTINATION
 
-  only:
-    - master
-
-  environment:
-    name: production
-    url: $PRODUCTION_URL
-
-  variables:
-    SSH_DESTINATION: $PRODUCTION_SSH_DESTINATION
-
-config-test-staging:
-  extends: .config-test
-
-  only:
-    - staging
-
-  environment:
-    name: staging
-    url: $STAGING_URL
-
-  variables:
-    SSH_DESTINATION: $STAGING_SSH_DESTINATION
+#config-test-staging:
+#  extends: .config-test
+#
+#  only:
+#    - staging
+#
+#  environment:
+#    name: staging
+#    url: $STAGING_URL
+#
+#  variables:
+#    SSH_DESTINATION: $STAGING_SSH_DESTINATION
 
 node-test:
   extends: .node-tests
@@ -119,34 +119,34 @@ security-advisories:
 # Staging
 #########
 
-deploy-staging:
-  extends: .deploy
-
-  only:
-    - staging
-
-  environment:
-    name: staging
-    url: $STAGING_URL
-
-  variables:
-    SSH_DESTINATION: $STAGING_SSH_DESTINATION
+#deploy-staging:
+#  extends: .deploy
+#
+#  only:
+#    - staging
+#
+#  environment:
+#    name: staging
+#    url: $STAGING_URL
+#
+#  variables:
+#    SSH_DESTINATION: $STAGING_SSH_DESTINATION
 
 # Production
 ############
 
-deploy-production:
-  extends: .deploy
-
-  only:
-    - master
-
-  environment:
-    name: production
-    url: $PRODUCTION_URL
-
-  variables:
-    SSH_DESTINATION: $PRODUCTION_SSH_DESTINATION
+#deploy-production:
+#  extends: .deploy
+#
+#  only:
+#    - master
+#
+#  environment:
+#    name: production
+#    url: $PRODUCTION_URL
+#
+#  variables:
+#    SSH_DESTINATION: $PRODUCTION_SSH_DESTINATION
 
 
 ############
