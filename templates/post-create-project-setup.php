@@ -22,8 +22,9 @@ echo "project webroot: " . $default_webroot . "\n";
  * Copy template files
  */
 echo "Copying template files...\n";
-//copy($templates_path . 'template.gitlab-ci.yml', $project_path . '/.gitlab-ci.yml');
-//copy($templates_path . 'templates/template.composer.json', $project_path . '/composer.json');
+copy($templates_path . 'template.README.md', $project_path . '/README.md');
+copy($templates_path . 'template.gitlab-ci.yml', $project_path . '/.gitlab-ci.yml');
+copy($templates_path . 'templates/template.composer.json', $project_path . '/composer.json');
 copy($templates_path . 'template.lando.yml', $project_path . '/lando.yml');
 copy($templates_path . 'lagoonize/template.env', $project_path . '/.env');
 copy($templates_path . 'lagoonize/template.lagoon.yml', $project_path . '/.lagoon.yml');
