@@ -36,7 +36,7 @@ replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_rep
 replace_file_token($project_path . '/.env', $token_replacments);
 
 delete_files($templates_path);
-echo "Finishing the project setup!\nRemember to update the .gitlab-ci.yml variables for deploy jobs\n";
+echo "Finishing the project setup!\n";
 
 /**
  * Replace file tokens with value.
@@ -54,17 +54,17 @@ function replace_file_token($filename, $replacement) {
     file_put_contents($filename, $content);
 }
 
-/*
- * php delete function that deals with directories recursively
+/**
+ * PHP delete function that deals with directories recursively
+ *
+ * @param $target
  */
 function delete_files($target) {
     if(is_dir($target)){
         $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
-
         foreach( $files as $file ){
             delete_files( $file );
         }
-
         rmdir( $target );
     } elseif(is_file($target)) {
         unlink( $target );

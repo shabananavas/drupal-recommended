@@ -96,11 +96,12 @@
                 "support"
             ],
             "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  based off the drupal/recommended-project template!     </>",
-                "<bg=blue;fg=white>  The project is setup to deploy via lagoon.             </>",
-                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>                                                                  </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase           </>",
+                "<bg=blue;fg=white>  based off the drupal/recommended-project template!              </>",
+                "<bg=blue;fg=white>  The project is setup to deploy via lagoon.                      </>",
+                "<bg=blue;fg=white>  Remember to update the .gitlab-ci.yml variables for deploy jobs </>",
+                "<bg=blue;fg=white>                                                                  </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",
                 "  * Install the site: https://www.drupal.org/docs/8/install",
