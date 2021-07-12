@@ -36,6 +36,7 @@ replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_rep
 replace_file_token($project_path . '/.env', $token_replacments);
 
 delete_files($templates_path);
+delete_files('./composer.lock');
 echo "Finishing the project setup!\n";
 
 /**
