@@ -12,7 +12,8 @@
   "require": {},
   "scripts": {
     "post-create-project-cmd": [
-      "php ./templates/post-create-project-setup.php"
+      "php ./templates/post-create-project-setup.php",
+      "composer install --ignore-platform-reqs"
     ]
   }
 }
