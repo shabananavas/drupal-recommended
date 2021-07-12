@@ -51,9 +51,6 @@
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
                 "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
-            },
-            "locations": {
-                "web-root": "web/"
             }
         },
         "installer-paths": {
