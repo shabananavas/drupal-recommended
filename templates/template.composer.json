@@ -44,6 +44,16 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
+            },
+            "allowed-packages": [
+                "amazeeio/drupal_integrations"
+            ],
+            "file-mapping": {
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
+            },
+            "locations": {
+                "web-root": "web/"
             }
         },
         "installer-paths": {
@@ -75,18 +85,6 @@
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
-        },
-        "drupal-scaffold": {
-            "allowed-packages": [
-                "amazeeio/drupal_integrations"
-            ],
-            "file-mapping": {
-                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
-                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
-            },
-            "locations": {
-                "web-root": "web/"
-            }
         },
         "drupal-core-project-message": {
             "include-keys": [

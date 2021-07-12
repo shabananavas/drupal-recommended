@@ -20,6 +20,7 @@ copy($templates_path . 'template.README.md', $project_path . '/README.md');
 copy($templates_path . 'template.gitlab-ci.yml', $project_path . '/.gitlab-ci.yml');
 copy($templates_path . 'template.gitignore', $project_path . '/.gitignore');
 copy($templates_path . 'template.composer.json', $project_path . '/composer.json');
+copy($templates_path . 'template.composer.lock', $project_path . '/composer.lock');
 copy($templates_path . 'template.grumphp.yml.dist', $project_path . '/grumphp.yml.dist');
 copy($templates_path . 'template.lando.yml', $project_path . '/lando.yml');
 copy($templates_path . 'lagoonize/template.env', $project_path . '/.env');
@@ -36,7 +37,6 @@ replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_rep
 replace_file_token($project_path . '/.env', $token_replacments);
 
 delete_files($templates_path);
-delete_files('./composer.lock');
 echo "Finishing the project setup!\n";
 
 /**
