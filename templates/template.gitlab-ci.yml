@@ -22,6 +22,7 @@ include:
       - '/ci-templates/jobs/pages/pages.yml'
       - '/ci-templates/jobs/php-debt.yml'
       - '/ci-templates/jobs/security-advisories.yml'
+      - '/ci-templates/jobs/pages/pages.yml'
 
   - template: Code-Quality.gitlab-ci.yml
 

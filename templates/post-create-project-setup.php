@@ -23,6 +23,7 @@ copy($templates_path . 'template.composer.json', $project_path . '/composer.json
 copy($templates_path . 'template.composer.lock', $project_path . '/composer.lock');
 copy($templates_path . 'template.grumphp.yml.dist', $project_path . '/grumphp.yml.dist');
 copy($templates_path . 'template.lando.yml', $project_path . '/.lando.yml');
+copy($templates_path . 'template.docker-compose.yml', $project_path . '/docker-compose.yml');
 copy($templates_path . 'lagoonize/template.env', $project_path . '/.env');
 copy($templates_path . 'lagoonize/template.lagoon.yml', $project_path . '/.lagoon.yml');
 
