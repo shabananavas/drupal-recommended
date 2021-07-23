@@ -2,7 +2,7 @@
   "name": "acromedia/drupal-recommended",
   "description": "An Acro Media drupal project skeleton",
   "type": "template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "mdupree",
