@@ -33,7 +33,8 @@ $token_replacments = [
 ];
 
 replace_file_token($project_path . '/.lando.yml', $token_replacments);
-replace_file_token($project_path . '/lagoon-images/cli.dockerfile', $token_replacments);
+replace_file_token($project_path . '/.lagoon.yml', $token_replacments);
+replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_replacments);
 replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_replacments);
 replace_file_token($project_path . '/.env', $token_replacments);
 
