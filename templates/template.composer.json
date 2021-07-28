@@ -106,5 +106,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "suggest": {
+        "drupal/commerce_api": "Provides additional commerce endpoints necessary for a decoupled commerce site"
     }
 }
