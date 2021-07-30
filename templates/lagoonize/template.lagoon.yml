@@ -6,11 +6,6 @@ api: https://api.lagoon-prd.acromedia.com/graphql
 ssh: ssh.lagoon-prd.acromedia.com:22
 
 tasks:
-  #   pre-rollout:
-  #     - run:
-  #         name: drush sql-dump
-  #         command: mkdir -p /app/web/sites/default/files/private/ && drush sql-dump --ordered-dump --gzip --result-file=/app/web/sites/default/files/private/pre-deploy-dump.sql.gz || true
-  #         service: cli
 
   post-rollout:
     - run:
@@ -23,19 +18,13 @@ tasks:
           fi
         service: cli
     - run:
-        name: drush cim
-        command: drush -y cim
+        name: IF Drupal installed run drush deploy
+        command: |
+          if tables=$(drush sqlq "show tables like 'node';") && ! [[ -z "$tables" ]]; then
+              # drupal installed, run drush deploy
+              drush deploy
+          fi
         service: cli
-    - run:
-        name: drush updb
-        command: drush -y updb
-        service: cli
-    - run:
-        name: drush cr
-        command: drush -y cr
-        service: cli
-
-
 
 environments:
   9.x:
