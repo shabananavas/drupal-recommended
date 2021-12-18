@@ -1,3 +1,5 @@
+#Ignore local files
+.env
 
 web/sites/*/services*.yml
 web/sites/*/settings.local.php
@@ -28,22 +30,22 @@ web/sites/example.sites.php
 web/sites/example.settings.local.php
 web/sites/development.services.yml
 web/libraries
-/.csslintrc
-/.editorconfig
-/.eslintignore
-/.eslintrc.json
-/.gitattributes
-/.ht.router.php
-/.htaccess
-/autoload.php
-/example.gitignore
-/index.php
-/INSTALL.txt
-/LICENSE.txt
-/README.txt
-/robots.txt
-/update.php
-/web.config
+web/.csslintrc
+web/.editorconfig
+web/.eslintignore
+web/.eslintrc.json
+web/.gitattributes
+web/.ht.router.php
+web/.htaccess
+web/autoload.php
+web/example.gitignore
+web/index.php
+web/INSTALL.txt
+web/LICENSE.txt
+web/README.md
+web/robots.txt
+web/update.php
+web/web.config
 *.sql
 *.sql.gz
 vendor
