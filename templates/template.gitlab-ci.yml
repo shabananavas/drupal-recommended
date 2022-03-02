@@ -19,10 +19,8 @@ include:
       - '/ci-templates/jobs/deploy.yml'
       - '/ci-templates/jobs/load-timer.yml'
       - '/ci-templates/jobs/node-tests.yml'
-      - '/ci-templates/jobs/pages/pages.yml'
       - '/ci-templates/jobs/php-debt.yml'
       - '/ci-templates/jobs/security-advisories.yml'
-      - '/ci-templates/jobs/pages/pages.yml'
 
   - template: Code-Quality.gitlab-ci.yml
 
@@ -172,8 +170,19 @@ load-timer-production:
   variables:
     LOAD_URL: $PRODUCTION_URL
 
-  pages:
-    extends: .pages
+pages:
+  stage: post
+  dependencies:
+    - automated-tests
+  script:
+    - mkdir public
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
 
 ##################
 # Common Templates
