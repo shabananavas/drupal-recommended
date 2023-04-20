@@ -47,9 +47,6 @@ variables:
 
   PROJECT_ROOT: /home/ACCOUNT_NAME/www/PROJECT_NAME
 
-  # Needed for 'node-tests'.
-  NODE_APP_ROOT:  /nodeAppRoot
-
   # This defaults to 'web/core/phpunit.xml.dist' if omitted here.
   PHPUNIT_FILE: $PROJECT_ROOT/phpunit.xml
 
@@ -102,8 +99,9 @@ code-standards:
 #  variables:
 #    SSH_DESTINATION: $STAGING_SSH_DESTINATION
 
-node-test:
-  extends: .node-tests
+# It is unlikely that a Gesso backend will have a node app.
+#node-test:
+#  extends: .node-tests
 
 php-debt:
   extends: .php-debt

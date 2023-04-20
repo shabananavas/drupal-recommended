@@ -26,6 +26,7 @@ copy($templates_path . 'template.lando.yml', $project_path . '/.lando.yml');
 copy($templates_path . 'template.docker-compose.yml', $project_path . '/docker-compose.yml');
 copy($templates_path . 'lagoonize/template.env', $project_path . '/.env');
 copy($templates_path . 'lagoonize/template.lagoon.yml', $project_path . '/.lagoon.yml');
+copy($templates_path . 'template.phpunit.xml.dist', $project_path . '/phpunit.xml.dist');
 
 $token_replacments = [
     '[PROJECTNAME]' => strtolower($default_project_name),
@@ -37,6 +38,8 @@ replace_file_token($project_path . '/.lagoon.yml', $token_replacments);
 replace_file_token($project_path . '/lagoon-images/cli.dockerfile', $token_replacments);
 replace_file_token($project_path . '/lagoon-images/nginx.dockerfile', $token_replacments);
 replace_file_token($project_path . '/.env', $token_replacments);
+replace_file_token($project_path . '/composer.json', $token_replacments);
+replace_file_token($project_path . '/phpunit.xml.dist', $token_replacments);
 
 delete_files($templates_path);
 echo "Finishing the project setup!\n";
