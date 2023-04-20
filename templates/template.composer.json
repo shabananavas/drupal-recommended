@@ -43,14 +43,16 @@
     "extra": {
         "drupal-scaffold": {
             "locations": {
-                "web-root": "web/"
+                "web-root": "[WEBROOT]/"
             },
             "allowed-packages": [
                 "amazeeio/drupal_integrations"
             ],
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
-                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml",
+                "[web-root]/modules/custom/.gitkeep": "assets/gitkeep",
+                "[web-root]/themes/custom/.gitkeep": "assets/gitkeep"
             }
         },
         "installer-paths": {
