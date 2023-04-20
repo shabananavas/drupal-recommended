@@ -28,7 +28,7 @@ copy($templates_path . 'lagoonize/template.env', $project_path . '/.env');
 copy($templates_path . 'lagoonize/template.lagoon.yml', $project_path . '/.lagoon.yml');
 
 $token_replacments = [
-    '[PROJECTNAME]' => $default_project_name,
+    '[PROJECTNAME]' => strtolower($default_project_name),
     '[WEBROOT]'     => $default_webroot
 ];
 
