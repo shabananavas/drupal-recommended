@@ -41,7 +41,9 @@ replace_file_token($project_path . '/.env', $token_replacments);
 replace_file_token($project_path . '/composer.json', $token_replacments);
 replace_file_token($project_path . '/phpunit.xml.dist', $token_replacments);
 
+delete_files('composer.lock');
 delete_files($templates_path);
+
 echo "Finishing the project setup!\n";
 
 /**
