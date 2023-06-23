@@ -5,3 +5,5 @@ config:
   flavor: drupal
   build:
     - composer install
+env_file:
+  - lando.env
