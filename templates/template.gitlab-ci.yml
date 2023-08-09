@@ -1,26 +1,27 @@
-# Drupal 8/9 GitLab CI
+# Drupal 10 GitLab CI
 
 # Custom docker image based off the stock PHP one, includes Drupal dependencies
 # and testing dependencies.
 # See details here: https://github.com/smmccabe/docker/blob/master/Dockerfile
-image: git.acromedia.com:4567/acro/code/docker:latest
+image: git.acromedia.com:4567/acro/code/docker:php8.1
 
 # Include the Acro Standards templates.
 # Remove whichever are not needed and relevant jobs below.
 include:
-  - project: 'acro/code/standards'
-    ref: master
+  - project: "acro/code/standards"
+    ref: 1.2.0
     file:
-      - '/ci-templates/variables.yml'
-      - '/ci-templates/jobs/phpunit-coverage.yml'
-      - '/ci-templates/jobs/build.yml'
-      - '/ci-templates/jobs/code-standards.yml'
-      - '/ci-templates/jobs/config-test.yml'
-      - '/ci-templates/jobs/deploy.yml'
-      - '/ci-templates/jobs/load-timer.yml'
-      - '/ci-templates/jobs/node-tests.yml'
-      - '/ci-templates/jobs/php-debt.yml'
-      - '/ci-templates/jobs/security-advisories.yml'
+      - "/ci-templates/variables.yml"
+      - "/ci-templates/jobs/phpunit-coverage.yml"
+      - "/ci-templates/jobs/build.yml"
+      - "/ci-templates/jobs/code-standards.yml"
+      - "/ci-templates/jobs/config-test.yml"
+      - "/ci-templates/jobs/deploy.yml"
+      - "/ci-templates/jobs/load-timer.yml"
+      - "/ci-templates/jobs/node-tests.yml"
+      - "/ci-templates/jobs/pages/pages.yml"
+      - "/ci-templates/jobs/php-debt.yml"
+      - "/ci-templates/jobs/security-advisories.yml"
 
   - template: Code-Quality.gitlab-ci.yml
 
@@ -28,6 +29,7 @@ include:
 stages:
   - build # Builds site and installs dependencies
   - test # Runs tests such as PHPCS and PHPUnit
+  - pre-deploy # Removes development dependencies
   - deploy # Deploys to Sites
   - post # Any checks or extras that need to happen
 
@@ -40,12 +42,15 @@ variables:
   ###########
   # Note all vars that NEED to be overridden are here.
   # Definitions can be found in the variables.yml file.
-  SITE_NAME: mySite
+  SITE_NAME: drupal-cms
   THEME_NAME: myTheme
 
   SETTINGS_OWNER: account:group
 
   PROJECT_ROOT: /home/ACCOUNT_NAME/www/PROJECT_NAME
+
+  # Needed for 'node-tests'.
+  NODE_APP_ROOT:  /nodeAppRoot
 
   # This defaults to 'web/core/phpunit.xml.dist' if omitted here.
   PHPUNIT_FILE: $PROJECT_ROOT/phpunit.xml
@@ -53,15 +58,15 @@ variables:
   PRODUCTION_SSH_DESTINATION: acro@mysite.com
   STAGING_SSH_DESTINATION: acro@mysite.stage.com
 
-  PRODUCTION_URL: https://mysite.com
-  STAGING_URL: https://mysite.stage.com
+  PRODUCTION_URL: https://gesso-drupal.acromedia.com
+  STAGING_URL: https://gesso-drupal.acrobuild.com
 
 #############
 # Build Stage
 #############
 
-build:
-  extends: .build
+build-test:
+  extends: .build-test
 
 ############
 # Test Stage
@@ -99,12 +104,11 @@ code-standards:
 #  variables:
 #    SSH_DESTINATION: $STAGING_SSH_DESTINATION
 
-# It is unlikely that a Gesso backend will have a node app.
 #node-test:
 #  extends: .node-tests
 
-php-debt:
-  extends: .php-debt
+#php-debt:
+#  extends: .php-debt
 
 security-advisories:
   extends: .security-advisories
@@ -150,37 +154,27 @@ security-advisories:
 # Post Stage
 ############
 
-load-timer-staging:
-  extends: .load-timer
+#load-timer-staging:
+#  extends: .load-timer
+#
+#  only:
+#    - staging
+#
+#  variables:
+#    LOAD_URL: $STAGING_URL
 
-  only:
-    - staging
 
-  variables:
-    LOAD_URL: $STAGING_URL
-
-load-timer-production:
-  extends: .load-timer
-
-  only:
-    - master
-
-  variables:
-    LOAD_URL: $PRODUCTION_URL
-
-pages:
-  stage: post
-  dependencies:
-    - automated-tests
-  script:
-    - mkdir public
-    - mv coverage/ public/
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-  only:
-    - master
+#load-timer-production:
+#  extends: .load-timer
+#
+#  only:
+#    - master
+#
+#  variables:
+#    LOAD_URL: $PRODUCTION_URL
+#
+#  pages:
+#    extends: .pages
 
 ##################
 # Common Templates
@@ -229,3 +223,11 @@ pages:
 #
 #  variables:
 #    LOADTIMER_URL: $TYPE_URL
+
+phpstan-analysis:
+  interruptible: true
+  stage: test
+  script:
+    # PHPStan analysis is run as part of the automated tests job because it
+    # depends on a complete codebase being built.
+    - vendor/bin/phpstan analyse -c phpstan.neon.dist --memory-limit=-1

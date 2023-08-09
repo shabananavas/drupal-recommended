@@ -2,7 +2,7 @@
 <!-- This file is optimised for Acromedia's GitLab CI -->
 <!-- For how to customize PHPUnit configuration, see core/tests/README.md. -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         bootstrap="[WEBROOT]/core/tests/bootstrap.php" colors="true"
+         bootstrap="web/core/tests/bootstrap.php" colors="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutChangesToGlobalState="true"
@@ -21,12 +21,18 @@
 
          <env name="SIMPLETEST_BASE_URL" value=""/>
          <env name="SIMPLETEST_DB" value=""/>
-         <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
          <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
          <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
          <env name="SYMFONY_DEPRECATIONS_HELPER" value="ignoreFile=.deprecation-ignore.txt"/>
     -->
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="web/sites/simpletest/browser_output"/>
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["chrome", {"chrome":{"switches":["--disable-dev-shm-usage", "--headless","--no-sandbox"]}}, "http://localhost:9515/wd/hub"]'/>
   </php>
+  <testsuites>
+    <testsuite name="Drupal CMS tests">
+      <directory>./web/modules/custom/</directory>
+    </testsuite>
+  </testsuites>
   <listeners>
     <listener class="\Drupal\Tests\Listeners\DrupalListener">
     </listener>

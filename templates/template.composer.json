@@ -1,6 +1,6 @@
 {
     "name": "acromedia/drupal-recommended",
-    "description": "Project template for Drupal 10 projects with a relocated document root",
+    "description": "Project template for Drupal projects with a relocated document root",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -15,23 +15,28 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.9",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/admin_toolbar": "^3.4",
+        "drupal/allowed_formats": "^2.0",
+        "drupal/color": "^1.0",
+        "drupal/color_field": "^3.0",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
-        "drupal/jsonapi_menu_items": "^1.1",
-        "drupal/openapi": "^2.0@RC",
-        "drupal/openapi_jsonapi": "^3.0",
-        "drupal/openapi_ui": "^1.0@RC",
-        "drupal/openapi_ui_swagger": "^1.0@DEV",
-        "amazeeio/drupal_integrations": "^0.3.4",
-        "cweagans/composer-patches": "^1.7.0",
-        "drupal/lagoon_logs": "^2.0",
-        "drush/drush": "^11"
-    },
-    "require-dev": {
-        "drupal/core-dev": "^10.0",
-        "phpro/grumphp": "^1.2"
+        "drupal/devel": "^5.1",
+        "drupal/devel_kint_extras": "^1.1",
+        "drupal/features": "^3.13",
+        "drupal/field_group": "^3.4",
+        "drupal/fontawesome": "^2.25",
+        "drupal/graphql": "^4.4",
+        "drupal/graphql_core_schema": "^1.0@beta",
+        "drupal/layout_paragraphs": "^2.0",
+        "drupal/redirect": "^1.8",
+        "drupal/restui": "^1.21",
+        "drupal/simple_oauth": "^5.2",
+        "drupal/svg_image_field": "^2.2",
+        "drush/drush": "^11.4"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -39,30 +44,28 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
-            "phpstan/extension-installer": true,
-            "cweagans/composer-patches": true,
             "drupal/core-project-message": true,
-            "phpro/grumphp": true
-        }
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true
+        },
+        "sort-packages": true
     },
     "extra": {
         "drupal-scaffold": {
             "locations": {
-                "web-root": "[WEBROOT]/"
+                "web-root": "web/"
             },
-            "allowed-packages": [
-                "amazeeio/drupal_integrations"
-            ],
+            "initial": {
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes"
+            },
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
-                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml",
-                "[web-root]/modules/custom/.gitkeep": "assets/gitkeep",
-                "[web-root]/themes/custom/.gitkeep": "assets/gitkeep"
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/acromedia.lagoon.site.yml"
             }
         },
         "installer-paths": {
@@ -70,8 +73,7 @@
                 "type:drupal-core"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library",
-                "swagger-api/swagger-ui"
+                "type:drupal-library"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
@@ -101,15 +103,13 @@
                 "support"
             ],
             "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                                  </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase           </>",
-                "<bg=blue;fg=white>  based off the drupal/recommended-project template!              </>",
-                "<bg=blue;fg=white>  The project is setup to deploy via lagoon.                      </>",
-                "<bg=blue;fg=white>  Remember to update the .gitlab-ci.yml variables for deploy jobs </>",
-                "<bg=blue;fg=white>                                                                  </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",
-                "  * Install the site: https://www.drupal.org/docs/8/install",
+                "  * Install the site: https://www.drupal.org/docs/installing-drupal",
                 "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
                 "  * Get support: https://www.drupal.org/support",
                 "  * Get involved with the Drupal community:",
@@ -117,9 +117,14 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "patches": {
+            "drupal/core": {
+                "Dialog drupalAutoButtons option should be respected on initial load": "https://www.drupal.org/files/issues/2022-12-16/2793343_75_0.patch"
+            },
+            "drupal/graphql": {
+                "Add missing subrequest buffer.": "https://patch-diff.githubusercontent.com/raw/drupal-graphql/graphql/pull/1313.patch"
+            }
         }
-    },
-    "suggest": {
-        "drupal/commerce_api": "Provides additional commerce endpoints necessary for a decoupled commerce site"
     }
 }

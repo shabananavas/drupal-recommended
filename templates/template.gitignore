@@ -52,3 +52,6 @@ vendor
 
 # Ignore phpstorm settings file.
 .idea
+
+# Ignore other settings files.
+.DS_Store

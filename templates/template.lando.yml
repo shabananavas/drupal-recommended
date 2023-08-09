@@ -3,7 +3,6 @@ recipe: lagoon
 config:
   webroot: [WEBROOT]
   flavor: drupal
-  build:
-    - composer install
+  php: "8.1"
 env_file:
   - lando.env
